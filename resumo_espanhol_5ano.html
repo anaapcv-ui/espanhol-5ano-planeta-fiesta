@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen 🔊 — Planeta Fiesta (Español 5º)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:#fff7e6;background-image:radial-gradient(#ffe2a8 1.5px,transparent 1.5px);background-size:20px 20px;min-height:100vh;color:#5a3e1b;padding:16px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  .top{background:#ffb703;border:5px solid #5a3e1b;border-radius:22px;padding:18px;text-align:center;box-shadow:8px 8px 0 #2a9d8f;margin-bottom:16px;}
+  .top h1{font-size:1.7em;color:#5a3e1b;}
+  .top p{margin-top:6px;font-weight:bold;color:#7a5620;}
+  .back{display:inline-block;margin-top:12px;background:#2a9d8f;color:#fff;text-decoration:none;padding:8px 18px;border-radius:12px;font-weight:bold;border:3px solid #5a3e1b;}
+  .section{background:#fff;border:5px solid #5a3e1b;border-radius:20px;padding:18px 16px;margin-bottom:18px;box-shadow:6px 6px 0 rgba(90,62,27,.15);}
+  .section h2{font-size:1.3em;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:#5a3e1b;}
+  .zona{display:inline-block;font-size:.55em;padding:3px 10px;border-radius:20px;color:#fff;}
+  .zv{background:#2a9d8f;} .zf{background:#f3722c;}
+  .lead{color:#9c6b1f;margin:6px 0 12px;font-weight:bold;font-size:.95em;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+  .voc{background:#fffaf0;border:3px solid #ffd166;border-radius:16px;padding:12px;text-align:center;}
+  .voc .es{font-size:1.06em;font-weight:bold;color:#5a3e1b;line-height:1.35;}
+  .voc .pt{color:#9c6b1f;font-size:.88em;margin-top:4px;}
+  .spk{margin-top:8px;background:#2a9d8f;border:2px solid #5a3e1b;color:#fff;border-radius:50%;width:38px;height:38px;font-size:1.05em;cursor:pointer;}
+  .spk:hover{background:#1b6b60;transform:scale(1.08);}
+  table{width:100%;border-collapse:collapse;margin-top:6px;border:3px solid #5a3e1b;border-radius:12px;overflow:hidden;}
+  th{background:#5a3e1b;color:#fff;padding:10px;font-size:.93em;}
+  td{padding:9px;border-bottom:1px solid #eadfce;font-size:.93em;text-align:center;vertical-align:middle;}
+  tr:nth-child(even) td{background:#fffaf0;}
+  td.p{font-weight:bold;color:#2a9d8f;}
+  .miniSpk{background:#f3722c;border:2px solid #5a3e1b;color:#fff;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:.9em;}
+  .rule{background:#e8f6f3;border:3px dashed #2a9d8f;border-radius:14px;padding:12px 14px;margin-top:10px;font-size:.95em;}
+  .rule b{color:#c1121f;}
+  .tl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;}
+  .tl .mes{background:#f3722c;color:#fff;border:3px solid #5a3e1b;border-radius:12px;padding:8px 10px;font-weight:bold;font-size:.85em;text-align:center;cursor:pointer;}
+  .tl .mes:hover{background:#d85f1e;}
+  .jogarbtn{display:block;width:100%;margin-top:8px;background:#2a9d8f;color:#fff;border:4px solid #5a3e1b;border-radius:16px;padding:14px;font-weight:bold;font-size:1.1em;cursor:pointer;font-family:inherit;text-decoration:none;text-align:center;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:10px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#ffb703;color:#5a3e1b;padding:12px;border-radius:14px;font-weight:bold;border:3px solid #5a3e1b;}
+  .navbtns a.alt{background:#2a9d8f;color:#fff;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#5a3e1b;color:#fff;padding:12px 20px;border-radius:14px;font-weight:bold;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none;}
+  #toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>🔊 Resumen con Audio</h1>
+    <p>Planeta Fiesta · Cap. 6 y 7 · ¡Toca el 🔊 en cada palabra!</p>
+    <a class="back" href="index.html">⬅ Volver al inicio</a>
+  </div>
+
+  <div class="section">
+    <h2>🌍 Elementos del medioambiente <span class="zona zv">Zona Verde</span></h2>
+    <p class="lead">El medioambiente es todo lo que nos rodea. ¡Hay que cuidarlo!</p>
+    <div class="grid" id="elementos"></div>
+  </div>
+
+  <div class="section">
+    <h2>🙌 El verbo TENER <span class="zona zv">Zona Verde</span></h2>
+    <table>
+      <tr><th>Persona</th><th>TENER</th><th>Ejemplo</th><th>🔊</th></tr>
+      <tr><td class="p">yo</td><td>tengo</td><td>tengo un árbol</td><td><button class="miniSpk" onclick="speak('yo tengo un árbol')">🔊</button></td></tr>
+      <tr><td class="p">tú</td><td>tienes</td><td>tienes una flor</td><td><button class="miniSpk" onclick="speak('tú tienes una flor')">🔊</button></td></tr>
+      <tr><td class="p">él / ella</td><td>tiene</td><td>ella tiene agua</td><td><button class="miniSpk" onclick="speak('ella tiene agua')">🔊</button></td></tr>
+      <tr><td class="p">nosotros</td><td>tenemos</td><td>tenemos que cuidar</td><td><button class="miniSpk" onclick="speak('nosotros tenemos que cuidar')">🔊</button></td></tr>
+      <tr><td class="p">vosotros</td><td>tenéis</td><td>tenéis plantas</td><td><button class="miniSpk" onclick="speak('vosotros tenéis plantas')">🔊</button></td></tr>
+      <tr><td class="p">ellos / ellas</td><td>tienen</td><td>tienen un jardín</td><td><button class="miniSpk" onclick="speak('ellos tienen un jardín')">🔊</button></td></tr>
+    </table>
+    <div class="rule">🦸 <b>Truco:</b> yo <b>tengo</b> · tú <b>tienes</b> · él <b>tiene</b> · nosotros <b>tenemos</b> · ellos <b>tienen</b>. Repare no <b>ie</b> em tienes/tiene/tienen.</div>
+  </div>
+
+  <div class="section">
+    <h2>📅 Los meses del año <span class="zona zf">Zona Fiesta</span></h2>
+    <p class="lead">12 meses, siempre en minúscula. Toca cada mes para escucharlo.</p>
+    <div class="tl" id="meses"></div>
+  </div>
+
+  <div class="section">
+    <h2>🎉 Las fiestas <span class="zona zf">Zona Fiesta</span></h2>
+    <p class="lead">Palabras para celebrar durante el año.</p>
+    <div class="grid" id="fiestas"></div>
+  </div>
+
+  <div class="section">
+    <h2>🥳 El verbo CELEBRAR <span class="zona zf">Zona Fiesta</span></h2>
+    <table>
+      <tr><th>Persona</th><th>CELEBRAR</th><th>🔊</th></tr>
+      <tr><td class="p">yo</td><td>celebro</td><td><button class="miniSpk" onclick="speak('yo celebro')">🔊</button></td></tr>
+      <tr><td class="p">tú</td><td>celebras</td><td><button class="miniSpk" onclick="speak('tú celebras')">🔊</button></td></tr>
+      <tr><td class="p">él / ella</td><td>celebra</td><td><button class="miniSpk" onclick="speak('él celebra')">🔊</button></td></tr>
+      <tr><td class="p">nosotros</td><td>celebramos</td><td><button class="miniSpk" onclick="speak('nosotros celebramos')">🔊</button></td></tr>
+      <tr><td class="p">vosotros</td><td>celebráis</td><td><button class="miniSpk" onclick="speak('vosotros celebráis')">🔊</button></td></tr>
+      <tr><td class="p">ellos / ellas</td><td>celebran</td><td><button class="miniSpk" onclick="speak('ellos celebran')">🔊</button></td></tr>
+    </table>
+    <div class="rule">🎈 <b>Es regular -ar:</b> -o, -as, -a, -amos, -áis, -an. Igual a <i>hablar</i> e <i>estudiar</i>.</div>
+  </div>
+
+  <div class="section">
+    <h2>🏆 Dicas de prova</h2>
+    <div class="rule">📌 Saiba <b>6 elementos del medioambiente</b>: el agua, el aire, el suelo, el sol, las plantas, los animales.</div>
+    <div class="rule">📌 <b>TENER</b>: tengo, tienes, tiene, tenemos, tenéis, tienen.</div>
+    <div class="rule">📌 Os <b>12 meses</b> em ordem e em minúscula (enero → diciembre).</div>
+    <div class="rule">📌 <b>CELEBRAR</b> (regular -ar): celebro, celebras, celebra, celebramos, celebráis, celebran.</div>
+    <div class="rule">💥 <b>Pegadinha:</b> «el cumpleaños» (aniversário) termina sempre em <b>s</b>; os meses são <b>minúsculos</b>.</div>
+  </div>
+
+  <div class="section" style="text-align:center;background:#2a9d8f;color:#fff;border-color:#5a3e1b;">
+    <h2 style="color:#fff;justify-content:center;">✅ ¿Ya estás listo?</h2>
+    <p style="margin:8px 0 12px;font-weight:bold;">¡Comprueba lo que aprendiste en el Simulado!</p>
+    <a class="jogarbtn" href="simulado_espanhol_5ano.html">📝 Ir al Simulado ➡</a>
+  </div>
+
+  <div class="navbtns">
+    <a href="quiz_espanhol_5ano.html">⬅ Quiz</a>
+    <a class="alt" href="simulado_espanhol_5ano.html">Simulado ➡</a>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+function speak(text){
+  if(!('speechSynthesis' in window)){toast('Seu navegador não tem áudio. Tente o Chrome.');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);u.lang='es-ES';u.rate=1;window.speechSynthesis.speak(u);
+}
+var elementos=[['el agua','a água'],['el aire','o ar'],['el suelo','o solo'],['el sol','o sol'],
+  ['las plantas','as plantas'],['los animales','os animais'],['el árbol','a árvore'],['la flor','a flor'],
+  ['la naturaleza','a natureza'],['reciclar','reciclar'],['la basura','o lixo'],['cuidar','cuidar']];
+var fiestas=[['el cumpleaños','o aniversário'],['la Navidad','o Natal'],['el Año Nuevo','o Ano Novo'],
+  ['el Carnaval','o Carnaval'],['la Pascua','a Páscoa'],['el Día de la Madre','o Dia das Mães'],
+  ['la fiesta','a festa'],['la torta','o bolo'],['los globos','os balões'],['los regalos','os presentes'],
+  ['las velas','as velas'],['la invitación','o convite']];
+var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function card(es,pt){
+  return '<div class="voc"><div class="es">'+es+'</div><div class="pt">'+pt+'</div>'+
+    '<button class="spk" onclick="speak(\''+es.replace(/'/g,"\\'")+'\')">🔊</button></div>';
+}
+document.getElementById('elementos').innerHTML=elementos.map(function(w){return card(w[0],w[1]);}).join('');
+document.getElementById('fiestas').innerHTML=fiestas.map(function(w){return card(w[0],w[1]);}).join('');
+document.getElementById('meses').innerHTML=meses.map(function(m){
+  return '<div class="mes" onclick="speak(\''+m+'\')">'+m+' 🔊</div>';
+}).join('');
+</script>
+</body>
+</html>

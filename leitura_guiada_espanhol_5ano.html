@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lectura Guiada 🔊 — Planeta Fiesta (Español 5º)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:#e8f6f3;background-image:radial-gradient(#bfe6dd 1.5px,transparent 1.5px);background-size:20px 20px;min-height:100vh;color:#1b4332;padding:16px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  .top{background:#2a9d8f;border:5px solid #1b4332;border-radius:22px;padding:18px;text-align:center;box-shadow:8px 8px 0 #ffb703;margin-bottom:16px;color:#fff;}
+  .top h1{font-size:1.7em;}
+  .top p{margin-top:6px;font-weight:bold;}
+  .back{display:inline-block;margin-top:12px;background:#ffd166;color:#1b4332;text-decoration:none;padding:8px 18px;border-radius:12px;font-weight:bold;border:3px solid #1b4332;}
+  .bar{background:#fff;border:4px solid #1b4332;border-radius:16px;height:26px;margin-bottom:16px;overflow:hidden;}
+  .bar>div{height:100%;width:0;background:linear-gradient(90deg,#48cae4,#2a9d8f);transition:width .4s;}
+  .stars{text-align:center;font-size:1.3em;margin-bottom:12px;min-height:1.4em;}
+  .block{background:#fff;border:5px solid #1b4332;border-radius:20px;padding:18px 16px;margin-bottom:18px;box-shadow:6px 6px 0 rgba(27,67,50,.15);}
+  .block.locked{opacity:.45;pointer-events:none;filter:grayscale(.4);}
+  .block h2{font-size:1.3em;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .zona{display:inline-block;font-size:.6em;padding:3px 10px;border-radius:20px;color:#fff;vertical-align:middle;}
+  .zv{background:#2a9d8f;} .zf{background:#f3722c;}
+  .text{background:#f1faee;border-left:7px solid #2a9d8f;border-radius:10px;padding:12px 14px;margin:10px 0;line-height:1.6;}
+  .text b{color:#1b4332;}
+  .voc{background:#fff6cc;border:3px dashed #ffb703;border-radius:14px;padding:12px;margin:10px 0;}
+  .voc h3{font-size:1em;margin-bottom:8px;color:#bc6c25;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+  .card{background:#f1faee;border:3px solid #a8dadc;border-radius:14px;padding:10px;text-align:center;}
+  .card .es{font-size:1.02em;font-weight:bold;color:#1b4332;line-height:1.3;}
+  .card .pt{color:#457b9d;font-size:.85em;margin-top:3px;}
+  .spk{margin-top:7px;background:#2a9d8f;border:2px solid #1b4332;color:#fff;border-radius:50%;width:36px;height:36px;font-size:1em;cursor:pointer;}
+  .spk:hover{background:#1b4332;transform:scale(1.08);}
+  table{width:100%;border-collapse:collapse;margin-top:8px;border:3px solid #1b4332;border-radius:12px;overflow:hidden;}
+  th{background:#1b4332;color:#fff;padding:9px;font-size:.92em;}
+  td{padding:9px;border-bottom:1px solid #d9e2ec;font-size:.92em;text-align:center;vertical-align:middle;}
+  tr:nth-child(even) td{background:#f1faee;}
+  .conj td.p{font-weight:bold;color:#2a9d8f;}
+  .miniSpk{background:#f3722c;border:2px solid #1b4332;color:#fff;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:.85em;}
+  .q{background:#eaf4ff;border:3px solid #48cae4;border-radius:14px;padding:12px;margin:12px 0;}
+  .q .pergunta{font-weight:bold;margin-bottom:8px;color:#1b4332;}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #90caf9;border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer;font-family:inherit;font-size:.96em;}
+  .opt:hover{background:#e3f2fd;}
+  .opt.ok{background:#c8f7d4;border-color:#2a9d8f;font-weight:bold;}
+  .opt.no{background:#ffd6de;border-color:#ef476f;}
+  .opt:disabled{cursor:default;}
+  .fb{margin-top:8px;padding:9px 12px;border-radius:10px;font-size:.92em;display:none;}
+  .fb.show{display:block;}
+  .fb.good{background:#c8f7d4;border:2px solid #2a9d8f;}
+  .fb.bad{background:#ffe0e6;border:2px solid #ef476f;}
+  .nextbtn{display:none;width:100%;margin-top:10px;background:#2a9d8f;color:#fff;border:3px solid #1b4332;border-radius:14px;padding:12px;font-weight:bold;font-size:1em;cursor:pointer;font-family:inherit;}
+  .nextbtn.show{display:block;}
+  .peg{background:#ffe8ee;border:3px solid #ef476f;border-radius:16px;padding:16px;margin-bottom:18px;}
+  .peg h2{color:#c1121f;margin-bottom:8px;}
+  .peg ul{margin-left:18px;line-height:1.7;}
+  .cob{background:#fff;border:4px solid #1b4332;border-radius:16px;padding:16px;margin-bottom:18px;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:10px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#2a9d8f;color:#fff;padding:12px;border-radius:14px;font-weight:bold;border:3px solid #1b4332;}
+  .navbtns a.alt{background:#48cae4;color:#1b4332;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b4332;color:#fff;padding:12px 20px;border-radius:14px;font-weight:bold;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none;}
+  #toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>📖🔊 Lectura Guiada — Planeta Fiesta</h1>
+    <p>Español 5º · Cap. 6 <b>Cuidemos el medioambiente</b> + Cap. 7 <b>¡Vamos a celebrar!</b></p>
+    <p style="font-size:.9em;font-weight:normal;">Toca el 🔊 para escuchar en español. Lee cada bloque y responde las 3 preguntas para abrir el siguiente.</p>
+    <a class="back" href="index.html">⬅ Volver al inicio</a>
+  </div>
+
+  <div class="bar"><div id="prog"></div></div>
+  <div class="stars" id="stars"></div>
+
+  <div id="blocks"></div>
+
+  <div class="peg">
+    <h2>💥 ¡Cuidado con las pegadinhas!</h2>
+    <ul>
+      <li>Com <b>yo</b>, o verbo TENER é <b>tengo</b> (não "teno").</li>
+      <li>Com <b>tú</b> é <b>tienes</b> e com <b>él/ella</b> é <b>tiene</b> — repare no <b>ie</b>.</li>
+      <li>Os meses em espanhol são escritos com <b>letra minúscula</b>: enero, febrero… (não "Enero").</li>
+      <li><b>septiembre</b> leva "p" (sep-ti-em-bre). Cuidado para não escrever "setembre".</li>
+      <li>CELEBRAR é um verbo <b>regular -ar</b>: com <b>nosotros</b> é <b>celebramos</b>, com <b>ellos</b> é <b>celebran</b>.</li>
+      <li>"Festa" em espanhol é <b>la fiesta</b>; "aniversário" é <b>el cumpleaños</b> (sempre com "s" no fim).</li>
+      <li>"Bolo" pode ser <b>la torta</b> ou <b>el pastel</b>; "presentes" são <b>los regalos</b>.</li>
+      <li><b>el agua</b> e <b>el aire</b> são elementos do meio ambiente — temos que cuidar deles.</li>
+    </ul>
+  </div>
+
+  <div class="cob">
+    <h2>🗺️ Tópico → Bloco (o que estudei)</h2>
+    <table>
+      <tr><th>Tópico da prova</th><th>Bloco</th></tr>
+      <tr><td>Elementos del medioambiente (p.52)</td><td>Bloco 1 — Zona Verde</td></tr>
+      <tr><td>Verbo TENER (p.54-55)</td><td>Bloco 2 — Zona Verde</td></tr>
+      <tr><td>Los meses del año (p.60-63)</td><td>Bloco 3 — Zona Fiesta</td></tr>
+      <tr><td>Las fiestas (p.62-63, 76-77)</td><td>Bloco 4 — Zona Fiesta</td></tr>
+      <tr><td>Verbo CELEBRAR (p.64-65)</td><td>Bloco 5 — Zona Fiesta</td></tr>
+    </table>
+  </div>
+
+  <div class="navbtns">
+    <a href="index.html">⬅ Início</a>
+    <a class="alt" href="quiz_espanhol_5ano.html">Quiz ➡</a>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+function speak(text,lang,rate){
+  if(!('speechSynthesis' in window)){toast('Seu navegador não tem áudio. Tente o Chrome.');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);u.lang=lang||'es-ES';u.rate=rate||1;
+  window.speechSynthesis.speak(u);
+}
+// ---- memória de reserva p/ localStorage ----
+var mem={};
+function save(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function load(k){try{var v=localStorage.getItem(k);return v===null?(k in mem?mem[k]:null):v;}catch(e){return k in mem?mem[k]:null;}}
+
+var KEY='lg_esp_5ano_cap67_v1';
+var done=JSON.parse(load(KEY)||'{}'); // {blocoIndex: true}
+
+// ---------- CONTEÚDO ----------
+function vcards(arr){
+  return '<div class="grid">'+arr.map(function(w){
+    return '<div class="card"><div class="es">'+w[0]+'</div><div class="pt">'+w[1]+'</div>'+
+    '<button class="spk" onclick="speak(\''+w[0].replace(/'/g,"\\'")+'\')">🔊</button></div>';
+  }).join('')+'</div>';
+}
+
+var blocks=[
+ {
+  titulo:'🌍 Los elementos del medioambiente',zona:'zv',zlabel:'Zona Verde',
+  html:
+   '<div class="text">El <b>medioambiente</b> es todo lo que nos rodea. Sus <b>elementos</b> son: '+
+   '<b>el agua</b>, <b>el aire</b>, <b>el suelo</b>, <b>el sol</b>, <b>las plantas</b> y <b>los animales</b>. '+
+   'Tenemos que <b>cuidar</b> la <b>naturaleza</b>: <b>reciclar</b> la <b>basura</b> y no <b>contaminar</b>.</div>'+
+   '<div class="voc"><h3>🔑 Palabras importantes (toca el 🔊)</h3>'+
+   vcards([['el agua','a água'],['el aire','o ar'],['el suelo','o solo / a terra'],['el sol','o sol'],
+           ['las plantas','as plantas'],['los animales','os animais'],['el árbol','a árvore'],
+           ['la naturaleza','a natureza'],['reciclar','reciclar'],['la basura','o lixo'],
+           ['cuidar','cuidar'],['contaminar','poluir']])+'</div>',
+  perguntas:[
+    {q:'¿Cuál es un elemento del medioambiente?',o:['El agua','El teléfono','La televisión','El coche'],c:0,
+     e:'«El agua» (a água) é um dos elementos da natureza. Telefone, televisão e carro são objetos feitos pelas pessoas.'},
+    {q:'«Reciclar la basura» significa…',o:['Jogar o lixo no chão','Reaproveitar o lixo para cuidar do planeta','Queimar as plantas','Poluir o ar'],c:1,
+     e:'Reciclar é reaproveitar o lixo (la basura) para proteger o meio ambiente.'},
+    {q:'O que respiramos e faz parte do medioambiente?',o:['El suelo','El aire','La basura','El regalo'],c:1,
+     e:'«El aire» (o ar) é o que respiramos. «El suelo» é o solo e «la basura» é o lixo.'}
+  ]
+ },
+ {
+  titulo:'🙌 El verbo TENER (presente)',zona:'zv',zlabel:'Zona Verde',
+  html:
+   '<div class="text">Usamos el verbo <b>TENER</b> para decir lo que <b>tenemos</b>. '+
+   'Es un verbo muy importante. ¡Apréndelo de memoria!</div>'+
+   '<table class="conj"><tr><th>Persona</th><th>TENER</th><th>🔊</th></tr>'+
+   '<tr><td class="p">yo</td><td>tengo</td><td><button class="miniSpk" onclick="speak(\'yo tengo\')">🔊</button></td></tr>'+
+   '<tr><td class="p">tú</td><td>tienes</td><td><button class="miniSpk" onclick="speak(\'tú tienes\')">🔊</button></td></tr>'+
+   '<tr><td class="p">él / ella</td><td>tiene</td><td><button class="miniSpk" onclick="speak(\'él tiene\')">🔊</button></td></tr>'+
+   '<tr><td class="p">nosotros</td><td>tenemos</td><td><button class="miniSpk" onclick="speak(\'nosotros tenemos\')">🔊</button></td></tr>'+
+   '<tr><td class="p">vosotros</td><td>tenéis</td><td><button class="miniSpk" onclick="speak(\'vosotros tenéis\')">🔊</button></td></tr>'+
+   '<tr><td class="p">ellos / ellas</td><td>tienen</td><td><button class="miniSpk" onclick="speak(\'ellos tienen\')">🔊</button></td></tr></table>'+
+   '<div class="voc"><h3>⭐ Frases de ejemplo</h3>'+
+   '<div class="card" style="text-align:left"><div class="es">Yo tengo un árbol en el jardín.</div><div class="pt">Eu tenho uma árvore no jardim.</div><button class="spk" onclick="speak(\'Yo tengo un árbol en el jardín.\')">🔊</button></div>'+
+   '<div class="card" style="text-align:left;margin-top:8px"><div class="es">La Tierra tiene agua y aire.</div><div class="pt">A Terra tem água e ar.</div><button class="spk" onclick="speak(\'La Tierra tiene agua y aire.\')">🔊</button></div>'+
+   '<div class="card" style="text-align:left;margin-top:8px"><div class="es">Nosotros tenemos que cuidar el planeta.</div><div class="pt">Nós temos que cuidar do planeta.</div><button class="spk" onclick="speak(\'Nosotros tenemos que cuidar el planeta.\')">🔊</button></div></div>',
+  perguntas:[
+    {q:'Completa: «Yo ___ un perro.»',o:['tengo','tienes','tiene','tenemos'],c:0,
+     e:'Com «yo» o verbo tener fica «tengo». Yo tengo un perro = Eu tenho um cachorro.'},
+    {q:'Completa: «Nosotros ___ que cuidar la naturaleza.»',o:['tengo','tienes','tenemos','tienen'],c:2,
+     e:'Com «nosotros» é «tenemos». Nosotros tenemos = Nós temos.'},
+    {q:'«Ella tiene flores» quer dizer…',o:['Eu tenho flores','Ela tem flores','Nós temos flores','Eles têm flores'],c:1,
+     e:'«Tiene» é a forma de él/ella. Ella tiene flores = Ela tem flores.'}
+  ]
+ },
+ {
+  titulo:'📅 Los meses del año',zona:'zf',zlabel:'Zona Fiesta',
+  html:
+   '<div class="text">Para hablar de fechas y fiestas usamos <b>los meses</b>. El año tiene <b>12 meses</b>. '+
+   'En español se escriben con <b>letra minúscula</b>.</div>'+
+   '<div class="voc"><h3>🔑 Los 12 meses (toca el 🔊)</h3>'+
+   vcards([['enero','janeiro'],['febrero','fevereiro'],['marzo','março'],['abril','abril'],
+           ['mayo','maio'],['junio','junho'],['julio','julho'],['agosto','agosto'],
+           ['septiembre','setembro'],['octubre','outubro'],['noviembre','novembro'],['diciembre','dezembro']])+'</div>'+
+   '<div class="text">Para dizer em que mês algo acontece usamos <b>«en»</b>: '+
+   '<b>en enero</b> (em janeiro), <b>en diciembre</b> (em dezembro).</div>',
+  perguntas:[
+    {q:'¿Cuál es el primer mes del año?',o:['marzo','enero','diciembre','abril'],c:1,
+     e:'«enero» (janeiro) é o primeiro mês do ano.'},
+    {q:'O mês «julio» em português é…',o:['junho','julho','janeiro','agosto'],c:1,
+     e:'«julio» = julho. Cuidado: «junio» é junho e «julio» é julho.'},
+    {q:'¿Cómo se escribe el último mes del año en español?',o:['Deciembre','diciembre','dezembro','dicimbre'],c:1,
+     e:'«diciembre» (dezembro), com letra minúscula e com "ci".'}
+  ]
+ },
+ {
+  titulo:'🎉 Las fiestas',zona:'zf',zlabel:'Zona Fiesta',
+  html:
+   '<div class="text">Durante el año hay muchas <b>fiestas</b> para <b>celebrar</b>. '+
+   'En una <b>fiesta</b> hay <b>torta</b>, <b>globos</b>, <b>regalos</b> y <b>velas</b>.</div>'+
+   '<div class="voc"><h3>🔑 Fiestas y palabras de fiesta (toca el 🔊)</h3>'+
+   vcards([['el cumpleaños','o aniversário'],['la Navidad','o Natal'],['el Año Nuevo','o Ano Novo'],
+           ['el Carnaval','o Carnaval'],['la Pascua','a Páscoa'],['el Día de la Madre','o Dia das Mães'],
+           ['la fiesta','a festa'],['la torta','o bolo'],['los globos','os balões'],
+           ['los regalos','os presentes'],['las velas','as velas'],['la invitación','o convite']])+'</div>'+
+   '<div class="voc"><h3>⭐ Frases</h3>'+
+   '<div class="card" style="text-align:left"><div class="es">¡Feliz cumpleaños!</div><div class="pt">Feliz aniversário!</div><button class="spk" onclick="speak(\'¡Feliz cumpleaños!\')">🔊</button></div>'+
+   '<div class="card" style="text-align:left;margin-top:8px"><div class="es">La Navidad es en diciembre.</div><div class="pt">O Natal é em dezembro.</div><button class="spk" onclick="speak(\'La Navidad es en diciembre.\')">🔊</button></div></div>',
+  perguntas:[
+    {q:'«El cumpleaños» em português é…',o:['O Natal','O aniversário','A festa','O presente'],c:1,
+     e:'«el cumpleaños» = o aniversário. «la fiesta» é a festa e «los regalos» são os presentes.'},
+    {q:'¿Qué fiesta se celebra en diciembre?',o:['El Carnaval','La Navidad','La Pascua','El Día de la Madre'],c:1,
+     e:'«La Navidad» (o Natal) é celebrada em diciembre (dezembro).'},
+    {q:'Numa festa de aniversário não pode faltar…',o:['la basura','la torta','el suelo','el aire'],c:1,
+     e:'«la torta» (o bolo) faz parte da festa. «la basura» é lixo e «el suelo» é o solo.'}
+  ]
+ },
+ {
+  titulo:'🥳 El verbo CELEBRAR (presente)',zona:'zf',zlabel:'Zona Fiesta',
+  html:
+   '<div class="text"><b>CELEBRAR</b> é um verbo <b>regular terminado en -ar</b>. '+
+   'Isso quer dizer que ele segue um padrão fácil. ¡Mira la tabla!</div>'+
+   '<table class="conj"><tr><th>Persona</th><th>CELEBRAR</th><th>🔊</th></tr>'+
+   '<tr><td class="p">yo</td><td>celebro</td><td><button class="miniSpk" onclick="speak(\'yo celebro\')">🔊</button></td></tr>'+
+   '<tr><td class="p">tú</td><td>celebras</td><td><button class="miniSpk" onclick="speak(\'tú celebras\')">🔊</button></td></tr>'+
+   '<tr><td class="p">él / ella</td><td>celebra</td><td><button class="miniSpk" onclick="speak(\'él celebra\')">🔊</button></td></tr>'+
+   '<tr><td class="p">nosotros</td><td>celebramos</td><td><button class="miniSpk" onclick="speak(\'nosotros celebramos\')">🔊</button></td></tr>'+
+   '<tr><td class="p">vosotros</td><td>celebráis</td><td><button class="miniSpk" onclick="speak(\'vosotros celebráis\')">🔊</button></td></tr>'+
+   '<tr><td class="p">ellos / ellas</td><td>celebran</td><td><button class="miniSpk" onclick="speak(\'ellos celebran\')">🔊</button></td></tr></table>'+
+   '<div class="voc"><h3>⭐ Frases de ejemplo</h3>'+
+   '<div class="card" style="text-align:left"><div class="es">Yo celebro mi cumpleaños en marzo.</div><div class="pt">Eu comemoro meu aniversário em março.</div><button class="spk" onclick="speak(\'Yo celebro mi cumpleaños en marzo.\')">🔊</button></div>'+
+   '<div class="card" style="text-align:left;margin-top:8px"><div class="es">Nosotros celebramos la Navidad en familia.</div><div class="pt">Nós comemoramos o Natal em família.</div><button class="spk" onclick="speak(\'Nosotros celebramos la Navidad en familia.\')">🔊</button></div></div>',
+  perguntas:[
+    {q:'Completa: «Yo ___ mi cumpleaños.»',o:['celebro','celebras','celebra','celebran'],c:0,
+     e:'Com «yo» o verbo regular -ar fica «celebro» (termina em -o).'},
+    {q:'Completa: «Ellos ___ la fiesta.»',o:['celebro','celebras','celebramos','celebran'],c:3,
+     e:'Com «ellos/ellas» é «celebran» (termina em -an).'},
+    {q:'«Nosotros celebramos» quer dizer…',o:['Eu comemoro','Tu comemoras','Nós comemoramos','Eles comemoram'],c:2,
+     e:'«celebramos» é a forma de nosotros = nós comemoramos.'}
+  ]
+ }
+];
+
+// ---------- RENDER ----------
+function render(){
+  var cont=document.getElementById('blocks');cont.innerHTML='';
+  blocks.forEach(function(b,i){
+    var unlocked = (i===0) || done[i-1];
+    var div=document.createElement('div');
+    div.className='block'+(unlocked?'':' locked');
+    div.id='b'+i;
+    var html='<h2>'+b.titulo+' <span class="zona '+b.zona+'">'+b.zlabel+'</span></h2>'+b.html;
+    html+='<div id="qs'+i+'">';
+    b.perguntas.forEach(function(p,j){
+      html+='<div class="q" id="q'+i+'_'+j+'"><div class="pergunta">'+(j+1)+') '+p.q+'</div>';
+      p.o.forEach(function(opt,k){
+        html+='<button class="opt" onclick="answer('+i+','+j+','+k+')">'+String.fromCharCode(97+k)+') '+opt+'</button>';
+      });
+      html+='<div class="fb" id="fb'+i+'_'+j+'"></div></div>';
+    });
+    html+='</div>';
+    html+='<button class="nextbtn" id="next'+i+'" onclick="openNext('+i+')">✅ ¡Muy bien! Abrir el siguiente bloque ⬇</button>';
+    div.innerHTML=html;
+    cont.appendChild(div);
+    // restaura respondidos
+    if(done[i]){markBlockDone(i);}
+  });
+  updateProgress();
+}
+var answered={}; // "i_j": true
+function answer(i,j,k){
+  var p=blocks[i].perguntas[j];
+  var qd=document.getElementById('q'+i+'_'+j);
+  var btns=qd.querySelectorAll('.opt');
+  btns.forEach(function(b,idx){
+    b.disabled=true;
+    if(idx===p.c)b.classList.add('ok');
+    if(idx===k && k!==p.c)b.classList.add('no');
+  });
+  var fb=document.getElementById('fb'+i+'_'+j);
+  if(k===p.c){fb.className='fb good show';fb.innerHTML='✅ ¡Correcto! '+p.e;}
+  else{fb.className='fb bad show';fb.innerHTML='❌ La respuesta correcta es <b>'+String.fromCharCode(97+p.c)+') '+p.o[p.c]+'</b>.<br>'+p.e;}
+  answered[i+'_'+j]=true;
+  // todas respondidas?
+  var all=blocks[i].perguntas.every(function(_,jj){return answered[i+'_'+jj];});
+  if(all){document.getElementById('next'+i).classList.add('show');}
+}
+function openNext(i){
+  done[i]=true;save(KEY,JSON.stringify(done));
+  var nb=document.getElementById('b'+(i+1));
+  if(nb){nb.classList.remove('locked');nb.scrollIntoView({behavior:'smooth'});}
+  else{toast('🏆 ¡Terminaste la lectura! Ahora ve al Quiz.');}
+  updateProgress();
+}
+function markBlockDone(i){
+  var next=document.getElementById('next'+i);if(next)next.classList.add('show');
+}
+function updateProgress(){
+  var n=0;for(var i=0;i<blocks.length;i++){if(done[i])n++;}
+  document.getElementById('prog').style.width=(n/blocks.length*100)+'%';
+  document.getElementById('stars').textContent='⭐'.repeat(n)+'☆'.repeat(blocks.length-n)+'  ('+n+'/'+blocks.length+' bloques)';
+}
+render();
+</script>
+</body>
+</html>

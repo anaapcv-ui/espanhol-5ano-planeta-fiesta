@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado 📝 — Planeta Fiesta (Español 5º)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:#f0f7f4;background-image:radial-gradient(#cfe8df 1.5px,transparent 1.5px);background-size:20px 20px;min-height:100vh;color:#1b4332;padding:16px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .top{background:#f3722c;border:5px solid #1b4332;border-radius:22px;padding:18px;text-align:center;box-shadow:8px 8px 0 #2a9d8f;margin-bottom:16px;color:#fff;}
+  .top h1{font-size:1.7em;}
+  .top p{margin-top:6px;font-weight:bold;}
+  .back{display:inline-block;margin-top:12px;background:#ffd166;color:#1b4332;text-decoration:none;padding:8px 18px;border-radius:12px;font-weight:bold;border:3px solid #1b4332;}
+  .bar{position:sticky;top:8px;background:#fff;border:4px solid #1b4332;border-radius:16px;height:26px;margin-bottom:8px;overflow:hidden;z-index:5;}
+  .bar>div{height:100%;width:0;background:linear-gradient(90deg,#2a9d8f,#f3722c);transition:width .4s;}
+  .count{text-align:center;font-weight:bold;margin-bottom:14px;}
+  .q{background:#fff;border:4px solid #1b4332;border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:4px 4px 0 rgba(27,67,50,.1);}
+  .q .pergunta{font-weight:bold;margin-bottom:9px;}
+  .q .num{color:#f3722c;}
+  .opt{display:block;width:100%;text-align:left;background:#f6fbf9;border:2px solid #a8dadc;border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer;font-family:inherit;font-size:.96em;}
+  .opt:hover{background:#e8f6f3;}
+  .opt.sel{background:#d4ecff;border-color:#4895ef;font-weight:bold;}
+  .opt.ok{background:#c8f7d4;border-color:#2a9d8f;font-weight:bold;}
+  .opt.no{background:#ffd6de;border-color:#ef476f;}
+  .opt:disabled{cursor:default;}
+  .reveal{margin-top:8px;padding:9px 12px;border-radius:10px;font-size:.9em;display:none;align-items:center;gap:10px;background:#eef7f3;border:2px solid #2a9d8f;}
+  .reveal.show{display:flex;}
+  .reveal .txt{flex:1;}
+  .spk{background:#2a9d8f;border:2px solid #1b4332;color:#fff;border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1em;flex-shrink:0;}
+  .spk:hover{background:#14564c;}
+  .corrigir{display:block;width:100%;background:#2a9d8f;color:#fff;border:4px solid #1b4332;border-radius:16px;padding:15px;font-weight:bold;font-size:1.15em;cursor:pointer;font-family:inherit;margin:10px 0;}
+  .corrigir:disabled{background:#9bbbb4;cursor:default;}
+  .result{background:#fff;border:5px solid #1b4332;border-radius:20px;padding:22px;text-align:center;box-shadow:6px 6px 0 #ffb703;display:none;margin-bottom:16px;}
+  .result.show{display:block;}
+  .result .big{font-size:2.3em;margin:6px 0;color:#2a9d8f;}
+  .btn{background:#f3722c;color:#fff;border:3px solid #1b4332;border-radius:14px;padding:11px 16px;font-weight:bold;cursor:pointer;font-family:inherit;margin:6px;text-decoration:none;display:inline-block;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:10px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#f3722c;color:#fff;padding:12px;border-radius:14px;font-weight:bold;border:3px solid #1b4332;}
+  .navbtns a.alt{background:#ffd166;color:#1b4332;}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b4332;color:#fff;padding:12px 20px;border-radius:14px;font-weight:bold;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none;}
+  #toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>📝 Simulado — Planeta Fiesta</h1>
+    <p>Español 5º · 25 preguntas · Cap. 6 y 7</p>
+    <p style="font-size:.9em;font-weight:normal;">Responde todas y toca «Corregir». El audio 🔊 aparece al corregir.</p>
+    <a class="back" href="index.html">⬅ Volver al inicio</a>
+  </div>
+
+  <div class="bar"><div id="prog"></div></div>
+  <div class="count" id="count">Respondidas: 0 / 25</div>
+
+  <div class="result" id="result">
+    <h2>¡Simulado corregido!</h2>
+    <div class="big" id="resStars"></div>
+    <div id="resMsg" style="font-weight:bold;margin-bottom:10px;"></div>
+    <a class="btn" href="gabarito_espanhol_5ano.html">📖 Ver gabarito comentado</a>
+    <button class="btn" onclick="resetSim()">🔁 Hacer de nuevo</button>
+  </div>
+
+  <div id="sim"></div>
+
+  <button class="corrigir" id="corrigir" onclick="corrigir()" disabled>✅ Corregir el simulado</button>
+
+  <div class="navbtns">
+    <a href="resumo_espanhol_5ano.html">⬅ Resumen</a>
+    <a class="alt" href="gabarito_espanhol_5ano.html">Gabarito ➡</a>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+function speak(text){
+  if(!('speechSynthesis' in window)){toast('Seu navegador não tem áudio. Tente o Chrome.');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);u.lang='es-ES';u.rate=1;window.speechSynthesis.speak(u);
+}
+var mem={};
+function save(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function shuffle(arr,seed){var r=mulberry32(seed);var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+// correta SEMPRE o 1º item de opts
+var QS=[
+ {q:'¿Cuál es un elemento del medioambiente?',opts:['el agua','el celular','la silla','el libro'],audio:'el agua',exp:'«el agua» é um elemento da natureza.'},
+ {q:'«el aire» em português é…',opts:['o ar','o solo','o sol','a água'],audio:'el aire',exp:'«el aire» = o ar.'},
+ {q:'«Reciclar la basura» significa…',opts:['reaproveitar o lixo','queimar o lixo','jogar no rio','esconder o lixo'],audio:'reciclar la basura',exp:'Reciclar = reaproveitar o lixo para cuidar do planeta.'},
+ {q:'«el suelo» é…',opts:['o solo / a terra','o céu','o fogo','o vento'],audio:'el suelo',exp:'«el suelo» = o solo, onde as plantas crescem.'},
+ {q:'Para cuidar del medioambiente debemos…',opts:['cuidar la naturaleza','contaminar el agua','cortar los árboles','tirar basura al suelo'],audio:'cuidar la naturaleza',exp:'Cuidar a natureza protege o meio ambiente.'},
+
+ {q:'Completa: «Yo ___ un jardín.»',opts:['tengo','tienes','tiene','tienen'],audio:'Yo tengo un jardín.',exp:'Com «yo» → tengo.'},
+ {q:'Completa: «Tú ___ una flor bonita.»',opts:['tienes','tengo','tiene','tenemos'],audio:'Tú tienes una flor bonita.',exp:'Com «tú» → tienes.'},
+ {q:'Completa: «Nosotros ___ agua limpia.»',opts:['tenemos','tengo','tienes','tienen'],audio:'Nosotros tenemos agua limpia.',exp:'Com «nosotros» → tenemos.'},
+ {q:'«Ella tiene un perro» quer dizer…',opts:['Ela tem um cachorro','Eu tenho um cachorro','Nós temos um cachorro','Eles têm um cachorro'],audio:'Ella tiene un perro.',exp:'«tiene» é a forma de él/ella.'},
+ {q:'Completa: «Ellos ___ muchas plantas.»',opts:['tienen','tengo','tienes','tenemos'],audio:'Ellos tienen muchas plantas.',exp:'Com «ellos/ellas» → tienen.'},
+
+ {q:'¿Cuál es el primer mes del año?',opts:['enero','abril','diciembre','julio'],audio:'enero',exp:'«enero» (janeiro) é o primeiro mês.'},
+ {q:'¿Cuál es el último mes del año?',opts:['diciembre','noviembre','octubre','enero'],audio:'diciembre',exp:'«diciembre» (dezembro) é o último mês.'},
+ {q:'«marzo» em português é…',opts:['março','maio','junho','janeiro'],audio:'marzo',exp:'«marzo» = março.'},
+ {q:'¿Qué mes viene después de «abril»?',opts:['mayo','junio','marzo','agosto'],audio:'mayo',exp:'Depois de abril vem «mayo» (maio).'},
+ {q:'«septiembre» em português é…',opts:['setembro','novembro','outubro','agosto'],audio:'septiembre',exp:'«septiembre» = setembro.'},
+
+ {q:'«el cumpleaños» em português é…',opts:['o aniversário','o Natal','o presente','a festa'],audio:'el cumpleaños',exp:'«el cumpleaños» = o aniversário.'},
+ {q:'¿Qué fiesta se celebra en diciembre?',opts:['la Navidad','el Carnaval','la Pascua','el Año Nuevo'],audio:'La Navidad es en diciembre.',exp:'La Navidad (Natal) é em dezembro.'},
+ {q:'En una fiesta de cumpleaños hay…',opts:['torta y globos','basura y humo','lluvia y frío','libros y lápices'],audio:'torta y globos',exp:'Numa festa há torta (bolo) e globos (balões).'},
+ {q:'«los regalos» em português é…',opts:['os presentes','as velas','os balões','as festas'],audio:'los regalos',exp:'«los regalos» = os presentes.'},
+ {q:'«la invitación» serve para…',opts:['chamar os amigos para a festa','limpar a casa','cantar na escola','regar as plantas'],audio:'la invitación',exp:'«la invitación» (o convite) chama os amigos para a festa.'},
+
+ {q:'Completa: «Yo ___ mi cumpleaños con la familia.»',opts:['celebro','celebras','celebra','celebran'],audio:'Yo celebro mi cumpleaños con la familia.',exp:'Verbo regular -ar, com «yo» → celebro.'},
+ {q:'Completa: «Nosotros ___ la Navidad en diciembre.»',opts:['celebramos','celebro','celebras','celebran'],audio:'Nosotros celebramos la Navidad en diciembre.',exp:'Com «nosotros» → celebramos.'},
+ {q:'Completa: «Ellos ___ el Año Nuevo con fuegos.»',opts:['celebran','celebro','celebras','celebramos'],audio:'Ellos celebran el Año Nuevo.',exp:'Com «ellos/ellas» → celebran.'},
+ {q:'Completa: «Tú ___ tu cumpleaños hoy.»',opts:['celebras','celebro','celebra','celebran'],audio:'Tú celebras tu cumpleaños hoy.',exp:'Com «tú» → celebras.'},
+ {q:'«Nosotros celebramos» quer dizer…',opts:['Nós comemoramos','Eu comemoro','Tu comemoras','Eles comemoram'],audio:'Nosotros celebramos.',exp:'«celebramos» é a forma de nosotros = nós comemoramos.'}
+];
+
+var answers={}; // i -> selectedText
+var corrected=false;
+function render(){
+  var cont=document.getElementById('sim');cont.innerHTML='';
+  QS.forEach(function(item,i){
+    item._shown=shuffle(item.opts, 5000+i);
+    item._correct=item.opts[0];
+    var div=document.createElement('div');div.className='q';div.id='q'+i;
+    var h='<div class="pergunta"><span class="num">'+(i+1)+'.</span> '+item.q+'</div>';
+    item._shown.forEach(function(opt,k){
+      h+='<button class="opt" id="o'+i+'_'+k+'" onclick="pick('+i+','+k+')">'+String.fromCharCode(97+k)+') '+opt+'</button>';
+    });
+    h+='<div class="reveal" id="rv'+i+'"></div>';
+    div.innerHTML=h;cont.appendChild(div);
+  });
+  updateCount();
+}
+function pick(i,k){
+  if(corrected)return;
+  var item=QS[i];answers[i]=item._shown[k];
+  var qd=document.getElementById('q'+i);
+  qd.querySelectorAll('.opt').forEach(function(b,idx){b.classList.toggle('sel',idx===k);});
+  updateCount();
+}
+function updateCount(){
+  var n=Object.keys(answers).length;
+  document.getElementById('count').textContent='Respondidas: '+n+' / '+QS.length;
+  document.getElementById('prog').style.width=(n/QS.length*100)+'%';
+  document.getElementById('corrigir').disabled=(n<QS.length);
+}
+function corrigir(){
+  if(Object.keys(answers).length<QS.length){toast('Responde todas las preguntas primero.');return;}
+  corrected=true;var score=0;
+  QS.forEach(function(item,i){
+    var sel=answers[i];var ok=(sel===item._correct);if(ok)score++;
+    var qd=document.getElementById('q'+i);
+    qd.querySelectorAll('.opt').forEach(function(b,idx){
+      b.disabled=true;b.classList.remove('sel');
+      var t=item._shown[idx];
+      if(t===item._correct)b.classList.add('ok');
+      else if(t===sel)b.classList.add('no');
+    });
+    var rv=document.getElementById('rv'+i);
+    var corrLetter=String.fromCharCode(97+item._shown.indexOf(item._correct));
+    rv.className='reveal show';
+    rv.innerHTML='<div class="txt">'+(ok?'✅ ¡Correcto! ':'❌ Correcta: <b>'+corrLetter+') '+item._correct+'</b>. ')+item.exp+'</div>'+
+      '<button class="spk" title="Escuchar" onclick="speak(\''+item.audio.replace(/'/g,"\\'")+'\')">🔊</button>';
+  });
+  document.getElementById('corrigir').style.display='none';
+  var pct=Math.round(score/QS.length*100);
+  var stars=Math.max(1,Math.round(score/5));
+  var res=document.getElementById('result');res.classList.add('show');
+  document.getElementById('resStars').textContent='⭐'.repeat(stars)+'☆'.repeat(5-stars);
+  var msg;
+  if(pct>=80)msg='🏆 ¡Excelente! '+score+'/25 ('+pct+'%). ¡Muy bien preparado para la prueba!';
+  else if(pct>=50)msg='👍 ¡Bien! '+score+'/25 ('+pct+'%). Mira el gabarito y repasa el Resumen.';
+  else msg='💪 '+score+'/25 ('+pct+'%). Vuelve a la Lectura y al Resumen. ¡Vas a mejorar!';
+  document.getElementById('resMsg').textContent=msg;
+  save('simulado_esp_5ano_cap67', JSON.stringify({score:score,pct:pct}));
+  res.scrollIntoView({behavior:'smooth'});
+}
+function resetSim(){answers={};corrected=false;document.getElementById('result').classList.remove('show');document.getElementById('corrigir').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});}
+render();
+</script>
+</body>
+</html>
